@@ -133,8 +133,6 @@ export default function HomeAdm() {
             return;
         }
 
-        // Não envia o campo password se o usuário deixou em branco
-        // (evita apagar a senha atual ao editar apenas nome/e-mail/etc.)
         const payload = { ...formData };
         if (!payload.password) {
             delete payload.password;
