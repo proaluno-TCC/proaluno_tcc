@@ -1,0 +1,242 @@
+/* ── Hero da Equipe ── */
+.teamHero {
+  text-align: center;
+  padding: clamp(100px, 14vw, 140px) 20px clamp(40px, 6vw, 60px);
+  background: #dcd1f666;
+}
+
+.teamHeroLabel {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  letter-spacing: 0.15em;
+  color: var(--purple-primary);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.teamHeroTitle {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+.teamHeroHighlight {
+  color: var(--purple-primary);
+}
+
+.teamHeroSubtitle {
+  font-family: var(--font-primary);
+  font-size: clamp(1rem, 2.2vw, 1.1rem);
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Seção de Cards ── */
+.teamSection {
+  padding: 40px 40px 80px;
+  max-width: 1300px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/*
+  Grid em flex-wrap: a última linha (os 3 cards restantes de 7)
+  se centraliza sozinha, sem precisar de nth-child ou margens manuais.
+  --cols controla quantas colunas cabem por linha em cada breakpoint.
+*/
+.teamGrid {
+  --cols: 4;
+  --gap: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+}
+
+/* Linha manual (se o HTML usar .teamRow) */
+.teamRow {
+  display: flex;
+  flex-wrap: wrap;                 /* ← permite quebrar no mobile */
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.teamRow .teamCard {
+  flex: 0 1 240px;
+  width: auto;
+}
+
+/* ── Card individual ── */
+.teamCard {
+  flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  min-width: 0;
+  max-width: 300px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.teamCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+}
+
+/* ── Foto / Avatar ── */
+.teamPhotoWrapper {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.teamPhoto {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;             /* ← era height: 220px fixo */
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+.teamAvatar {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, var(--purple-mid), var(--purple-primary));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3rem);
+  color: var(--color-text-light);
+}
+
+/* ── Texto ── */
+.memberName {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.memberRole {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ── Botão Meet ── */
+.meetBtn {
+  margin-top: 8px;
+  padding: 10px 24px;
+  border: 2px solid #1a1a1a;
+  border-radius: 50px;
+  background: transparent;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.meetBtn:hover {
+  background-color: var(--purple-primary);
+  border-color: var(--purple-primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVO
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Laptop pequeno (≤ 1100px): 3 por linha ── */
+@media (max-width: 1100px) {
+  .teamGrid {
+    --cols: 3;
+  }
+
+  .teamSection {
+    padding: 40px 24px 70px;
+  }
+}
+
+/* ── Tablet (≤ 768px): 2 por linha ── */
+@media (max-width: 768px) {
+  .teamGrid {
+    --cols: 2;
+    --gap: 20px;
+  }
+
+  .teamRow {
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .teamSection {
+    padding: 30px 20px 60px;
+  }
+
+  .teamCard {
+    padding: 24px 16px;
+  }
+
+  /* sem "lift" em telas touch */
+  .teamCard:hover,
+  .meetBtn:hover {
+    transform: none;
+  }
+}
+
+/* ── Mobile (≤ 480px): 1 por linha ── */
+@media (max-width: 480px) {
+  .teamGrid {
+    --cols: 1;
+    --gap: 16px;
+  }
+
+  .teamCard,
+  .teamRow .teamCard {
+    flex: 0 0 100%;
+    max-width: 340px;              /* não estica demais em telas largas de celular */
+  }
+
+  .teamSection {
+    padding: 24px 16px 48px;
+  }
+
+  .meetBtn {
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+/* ── Acessibilidade ── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

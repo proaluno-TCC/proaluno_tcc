@@ -1,0 +1,490 @@
+/* ── Botão ── */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: var(--purple-primary);
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--border-radius);
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background-color: var(--blue-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ── Section Title ── */
+.sectionTitle {
+    text-align: center;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+    position: relative;
+}
+
+.sectionTitle::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--purple-light);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* ── Hero ── */
+.sectionHero {
+    padding-top: clamp(100px, 14vw, 140px);   /* ← era 140px fixo */
+    padding-bottom: clamp(48px, 8vw, 100px);
+    display: flex;
+    align-items: center;
+    min-height: 600px;
+    background: #dcd1f680;
+}
+
+.heroContainer {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 40px);
+}
+
+.heroContent {
+    flex: 1;
+    min-width: 0;
+    max-width: 782px;
+}
+
+.heroTitle {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    line-height: 1.3;
+    color: var(--purple-primary);
+    margin-bottom: 30px;
+    overflow-wrap: break-word;
+}
+
+.heroText {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+    line-height: 1.6;
+    color: #3f2f43;
+}
+
+.heroDecoration {
+    flex-shrink: 0;
+    width: 40%;
+    max-width: 500px;
+}
+
+.heroDecorationInner {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 3;                       /* ← era height: 300px fixo */
+    background: var(--purple-mid);
+    border-radius: 20px;
+    opacity: 0.7;
+}
+
+/* ── About ── */
+.sectionAbout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.aboutCard {
+    background: var(--purple-mid);
+    border-radius: clamp(24px, 4vw, 40px);
+    padding: clamp(2rem, 6vw, 60px) clamp(1.25rem, 6vw, 80px);
+    width: 100%;                               /* ← sem isso o card encolhia no flex */
+    max-width: 1225px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: var(--shadow);
+    color: var(--color-text-light);
+}
+
+.aboutTitle {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+    color: var(--color-text-light);
+    margin-bottom: 30px;
+}
+
+.aboutText {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    line-height: 1.6;
+    color: var(--color-text-light);
+}
+
+.aboutText + .aboutText {
+    margin-top: 20px;
+}
+
+/* ── Audience ── */
+.sectionAudience {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.audienceHeader {
+    margin-bottom: clamp(2rem, 6vw, 60px);
+}
+
+.audienceTitle {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+    color: var(--purple-primary);
+    margin-bottom: 15px;
+}
+
+.audienceSubtitle {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    color: var(--color-text-muted);
+}
+
+.audienceGrid {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1.25rem, 3vw, 40px);
+    flex-wrap: wrap;
+}
+
+.audienceCard {
+    background: #b19fe580;
+    border-radius: 25px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 350px;
+    min-height: 300px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.audienceCard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.audienceCard h3 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--purple-primary);
+    margin-bottom: 20px;
+}
+
+.audienceCard p {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+}
+
+.audienceFooter {
+    margin-top: clamp(2.5rem, 7vw, 80px);
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: clamp(1.15rem, 3vw, 1.5rem);
+    color: var(--purple-primary);
+}
+
+/* ── How It Works ── */
+.sectionHowItWorks {
+    background: var(--purple-mid);
+    color: var(--color-text-light);
+    padding: clamp(3rem, 8vw, 80px) 20px;
+}
+
+.howItWorksInner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.howItWorksTitle {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+    color: var(--color-text-light);
+    text-align: center;
+    margin-bottom: clamp(2rem, 6vw, 60px);
+}
+
+.howItWorksGrid {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1.25rem, 3vw, 40px);
+    flex-wrap: wrap;
+}
+
+.howItWorksCard {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    padding: 40px 30px 80px 30px;
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
+    text-align: left;
+    position: relative;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.howItWorksCard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.howItWorksCard h3 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: var(--purple-primary);
+}
+
+.howItWorksCard p {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+}
+
+.stepNumber {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 3rem;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    color: var(--purple-light);
+}
+
+/* ── Team ── */
+.sectionTeam {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.teamTitle {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+    color: var(--purple-primary);
+    margin-bottom: 30px;
+}
+
+.teamIntro {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    max-width: 1220px;
+    margin: 0 auto;
+}
+
+.teamDivider {
+    border: 2px solid var(--purple-primary);
+    margin: clamp(2rem, 6vw, 60px) 0;
+    opacity: 0.3;
+}
+
+.teamMembers {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 6vw, 60px);
+}
+
+.teamMember {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.teamPhoto {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 5px solid var(--purple-mid);
+    box-shadow: var(--shadow);
+    background: var(--purple-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: var(--font-secondary);
+    overflow: hidden;
+}
+
+.teamMember h3 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--purple-primary);
+}
+
+.teamMember p {
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    max-width: 800px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVO
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Tablet (≤ 992px) ── */
+@media (max-width: 992px) {
+    .sectionHero {
+        min-height: auto;
+    }
+
+    .heroDecoration {
+        width: 34%;
+    }
+
+    /* 3 cards ficam em 2 + 1 centralizado, sem encolher demais */
+    .audienceCard,
+    .howItWorksCard {
+        max-width: 320px;
+    }
+}
+
+/* ── Mobile grande (≤ 768px) ── */
+@media (max-width: 768px) {
+    .heroContainer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .heroContent {
+        max-width: 100%;
+    }
+
+    .heroDecoration {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .sectionAbout,
+    .sectionAudience,
+    .sectionTeam {
+        padding: 32px 16px;
+    }
+
+    .audienceCard,
+    .howItWorksCard {
+        max-width: 100%;
+    }
+
+    .audienceCard {
+        min-height: 0;
+        padding: 32px 24px;
+    }
+
+    .howItWorksCard {
+        padding: 32px 24px 72px;
+    }
+
+    .teamPhoto {
+        width: 160px;
+        height: 160px;
+    }
+
+    /* sem "lift" em telas touch */
+    .audienceCard:hover,
+    .howItWorksCard:hover,
+    .btn:hover {
+        transform: none;
+    }
+}
+
+/* ── Mobile (≤ 576px) ── */
+@media (max-width: 576px) {
+    .heroContainer {
+        padding: 0 16px;
+    }
+
+    .heroDecorationInner {
+        aspect-ratio: 2 / 1;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .sectionHowItWorks {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .audienceCard h3,
+    .howItWorksCard h3 {
+        font-size: 1.3rem;
+    }
+
+    .audienceCard p,
+    .howItWorksCard p,
+    .teamMember p {
+        font-size: 1rem;
+    }
+
+    .stepNumber {
+        font-size: 2.4rem;
+        right: 24px;
+    }
+
+    .teamPhoto {
+        width: 140px;
+        height: 140px;
+        font-size: 1.25rem;
+    }
+}
+
+/* ── Acessibilidade ── */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,409 @@
+/* ── Feedback Section ── */
+.feedbackSection {
+    padding: clamp(5rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 8rem);
+    position: relative;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+}
+
+.feedbackSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.feedbackContainer {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+    box-sizing: border-box;
+}
+
+.feedbackIntro {
+    max-width: 800px;
+    margin: 0 auto clamp(2rem, 6vw, 4rem);
+    text-align: center;
+}
+
+.feedbackTitle {
+    font-family: var(--font-secondary);
+    font-size: clamp(1.9rem, 5.5vw, 3rem);
+    font-weight: 600;
+    background: var(--purple-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;                         /* ← era 1.9, muito alto quando o título quebra linha */
+    overflow-wrap: break-word;
+}
+
+.feedbackDescription {
+    font-size: clamp(1rem, 2.4vw, 1.2rem);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
+.feedbackContentGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);   /* ← minmax(0) impede estouro por conteúdo largo */
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+}
+
+/* ── Form ── */
+.formWrapper {
+    position: relative;
+    min-width: 0;
+}
+
+.formCard {
+    background: var(--white-primary);
+    border-radius: var(--border-radius-xl);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.formCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--purple-primary);
+}
+
+.formCard form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formGroup label {
+    font-weight: 600;
+    color: var(--color-text-dark);
+    font-size: 1rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+    box-sizing: border-box;                   /* ← sem isso o padding estoura o card */
+    background: var(--color-background-alt);
+    border: 2px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1rem 1.25rem;
+    font-family: var(--font-primary);
+    font-size: 1rem;                          /* ≥16px evita zoom automático no iOS */
+    transition: var(--transition);
+    resize: vertical;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: var(--purple-primary);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    background: var(--white-primary);
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+/* ── Estado de erro nos inputs ── */
+.inputError {
+    border-color: var(--color-error) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.errorMessage {
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* ── Submit Button ── */
+.submitBtn {
+    background: var(--purple-primary);
+    color: var(--white-primary);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    box-shadow: var(--shadow-md);
+}
+
+.submitBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── Contact Card ── */
+.contactWrapper {
+    position: relative;
+    min-width: 0;
+}
+
+.contactCard {
+    background: var(--white-primary);
+    border-radius: var(--border-radius-xl);
+    padding: clamp(1.5rem, 3vw, 2rem);
+    box-shadow: var(--shadow-xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contactCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--purple-primary);
+}
+
+.contactSocialIcons {
+    display: flex;
+    flex-wrap: wrap;                          /* ← quebra se faltar espaço */
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    margin-bottom: 2rem;
+}
+
+.socialIcon {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    background: var(--purple-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-primary);
+    font-size: 2rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+}
+
+.socialIcon:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.contactDetails {
+    text-align: center;
+}
+
+.contactDetails p {
+    font-size: clamp(1rem, 2.4vw, 1.2rem);
+    margin-bottom: 1rem;
+    color: var(--color-text-dark);
+    display: flex;
+    flex-wrap: wrap;                          /* ← "Email: endereco@longo.com" quebra em vez de estourar */
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem 0.5rem;
+    overflow-wrap: anywhere;
+}
+
+.contactDetails strong {
+    color: var(--purple-primary);
+    font-weight: 600;
+}
+
+/* ── Modal de Sucesso ── */
+.successModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.successModalActive {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modalContent {
+    background: var(--white-primary);
+    border-radius: var(--border-radius-xl);
+    padding: clamp(1.5rem, 5vw, 3rem);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;                         /* ← não corta em celular deitado */
+    max-height: 90dvh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    box-shadow: var(--shadow-xl);
+    transform: scale(0.7);
+    transition: var(--transition);
+}
+
+.successModalActive .modalContent {
+    transform: scale(1);
+}
+
+.successIcon {
+    width: 80px;
+    height: 80px;
+    background: var(--color-success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--white-primary);
+    font-size: 2.5rem;
+}
+
+.modalTitle {
+    font-family: var(--font-secondary);
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 700;
+    color: var(--color-success);
+    margin-bottom: 1rem;
+}
+
+.modalMessage {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.modalCloseBtn {
+    background: var(--purple-primary);
+    color: var(--white-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.modalCloseBtn:hover {
+    background: var(--purple-primary-dark);
+    transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVO
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Tablet (≤ 992px): empilha formulário e contato ── */
+@media (max-width: 992px) {
+    .feedbackContentGrid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.5rem;
+        max-width: 700px;                     /* evita formulário esticado em tablet */
+        margin: 0 auto;
+    }
+}
+
+/* ── Mobile grande (≤ 768px) ── */
+@media (max-width: 768px) {
+    .feedbackContentGrid {
+        gap: 2rem;
+    }
+
+    .formCard form {
+        gap: 1.25rem;
+    }
+
+    .socialIcon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+    }
+
+    /* sem "lift" em telas touch */
+    .submitBtn:hover,
+    .socialIcon:hover,
+    .modalCloseBtn:hover {
+        transform: none;
+    }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+    .formGroup input,
+    .formGroup textarea {
+        padding: 0.875rem 1rem;
+    }
+
+    .submitBtn {
+        width: 100%;
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    .successIcon {
+        width: 64px;
+        height: 64px;
+        font-size: 2rem;
+    }
+
+    .modalCloseBtn {
+        width: 100%;
+    }
+}
+
+/* ── Acessibilidade ── */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.01ms !important;
+    }
+}

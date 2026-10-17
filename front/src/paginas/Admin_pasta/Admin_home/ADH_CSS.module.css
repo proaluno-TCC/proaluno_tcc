@@ -1,0 +1,1123 @@
+/* ── Defining CSS Variables and Base Layout ── */
+    :root {
+        --primary-dark: #3e1174;
+        --primary-medium: #6a1b9a;
+        --primary-light: #7b2cbf;
+        --primary-gradient: linear-gradient(135deg, #390f6b 0%, #4f1692 50%, #631da8 100%);
+        --accent-yellow: #d4e157;
+        --accent-yellow-hover: #c0ca33;
+        --bg-page: #f5f0fb;
+        --bg-card: #ffffff;
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --border-purple: #f3e8ff;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+        --radius-xl: 24px;
+        --shadow-sm: 0 2px 4px rgba(62, 17, 116, 0.04);
+        --shadow-md: 0 6px 16px rgba(62, 17, 116, 0.08);
+        --shadow-lg: 0 12px 32px rgba(62, 17, 116, 0.15);
+        --font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    }
+
+    .container {
+        font-family: var(--font-family);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg-page);
+        color: var(--text-main);
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        background-color: transparent;
+    }
+
+    .brandLogo {
+        height: 150px;                  /* Altura ajustada para destacar no cabeçalho */
+        width: auto;                   /* Preserva as proporções originais */
+        object-fit: contain;
+        display: block;
+        mix-blend-mode: screen;        /* Remove visualmente o fundo preto da imagem WebP */
+        filter: brightness(1.1);       /* Aumenta levemente o contraste do branco */
+    }
+
+    .logoIcon {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.6rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .brandName {
+        font-size: 1.25rem;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        color: #ffffff;
+        line-height: 1;
+    }
+
+    .brandTagline {
+        font-size: 0.625rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #e9d5ff;
+        margin-top: 0.25rem;
+    }
+
+    .nav {
+        display: none;
+        align-items: center;
+        gap: 2rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+    }
+
+    @media (min-width: 768px) {
+        .nav {
+            display: flex;
+        }
+    }
+
+    .navLink {
+        color: #f3e8ff;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .navLink:hover {
+        color: #ffffff;
+    }
+
+    .navLinkActive {
+        color: #ffffff;
+        font-weight: 700;
+        border-bottom: 2px solid var(--accent-yellow);
+        padding-bottom: 0.25rem;
+    }
+
+    .userBadge {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: rgba(88, 28, 135, 0.6);
+        border: 1px solid rgba(216, 180, 254, 0.3);
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+    }
+
+    .userAvatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 9999px;
+        background-color: var(--primary-light);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 0.75rem;
+    }
+
+    .userBadgeText {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #f3e8ff;
+    }
+
+    /* ── Styling Hero Section ── */
+    .hero {
+        background: var(--primary-gradient);
+        color: #ffffff;
+        padding: 4rem 1.5rem;
+        margin-top: 70px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+    }
+
+    .heroContent {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+    }
+
+    .heroTitle {
+        color: white;
+        font-size: 2rem;
+        font-weight: 900;
+        line-height: 1.25;
+        margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+        .heroTitle {
+            font-size: 2.75rem;
+        }
+    }
+
+    .heroDescription {
+        color: #f3e8ff;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .heroBtn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        background-color: var(--accent-yellow);
+        color: #2c3e50;
+        font-weight: 800;
+        padding: 0.875rem 2rem;
+        border-radius: 1rem;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        box-shadow: var(--shadow-md);
+        transition: all 0.2s;
+    }
+
+    .heroBtn:hover {
+        background-color: var(--accent-yellow-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* ── Styling Action Cards and Functions ── */
+    .section {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+        width: 100%;
+    }
+
+    .sectionHeader {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+        position: relative;
+        display: inline-block;
+    }
+
+    .titleLine {
+        display: block;
+        height: 6px;
+        width: 80px;
+        background-color: var(--primary-light);
+        margin: 0.5rem auto 0;
+        border-radius: 9999px;
+    }
+
+    .cardsGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .cardsGrid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .card {
+        background-color: var(--bg-card);
+        border-radius: var(--radius-xl);
+        padding: 2rem;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-purple);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .cardIconBox {
+        width: 5rem;
+        height: 5rem;
+        background-color: #faf5ff;
+        border-radius: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-medium);
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border-purple);
+    }
+
+    .cardTitle {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.75rem;
+    }
+
+    .cardDescription {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        flex-grow: 1;
+    }
+
+    .cardBtn {
+        width: 100%;
+        background-color: var(--accent-yellow);
+        color: #2c3e50;
+        font-weight: 700;
+        padding: 0.875rem 1.5rem;
+        border-radius: 1rem;
+        border: none;
+        cursor: pointer;
+        font-size: 0.875rem;
+        transition: background-color 0.15s, box-shadow 0.15s;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .cardBtn:hover {
+        background-color: var(--accent-yellow-hover);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* ── Styling Users Table and Management Section ── */
+    .tableContainer {
+        background-color: var(--bg-card);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-purple);
+        overflow: hidden;
+        margin-bottom: 3rem;
+    }
+
+    .tableHeader {
+        padding: 2rem;
+        background: linear-gradient(90deg, rgba(250, 245, 255, 0.6) 0%, #ffffff 100%);
+        border-bottom: 1px solid var(--border-purple);
+    }
+
+    .tableHeaderTop {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .tableHeaderTop {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    .tableMainTitle {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+    }
+
+    .tableSubTitle {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+    }
+
+    .btnPrimary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: var(--primary-medium);
+        color: #ffffff;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border-radius: 1rem;
+        border: none;
+        cursor: pointer;
+        font-size: 0.875rem;
+        transition: background-color 0.2s, box-shadow 0.2s;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .btnPrimary:hover {
+        background-color: #521794;
+        box-shadow: var(--shadow-md);
+    }
+
+    .filterRow {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .filterRow {
+            grid-template-columns: 2fr 1fr;
+        }
+    }
+
+    .searchBox {
+        position: relative;
+    }
+
+    .searchIcon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .searchInput {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.75rem;
+        border: 1px solid var(--border-purple);
+        border-radius: 1rem;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .searchInput:focus {
+        border-color: var(--primary-medium);
+        box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.1);
+    }
+
+    .selectBox {
+        position: relative;
+    }
+
+    .filterIcon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        width: 1rem;
+        height: 1rem;
+        pointer-events: none;
+    }
+
+    .filterSelect {
+        width: 100%;
+        padding: 0.75rem 2.5rem 0.75rem 2.5rem;
+        border: 1px solid var(--border-purple);
+        border-radius: 1rem;
+        font-size: 0.875rem;
+        color: #334155;
+        background-color: #ffffff;
+        outline: none;
+        cursor: pointer;
+        appearance: none;
+        font-weight: 500;
+    }
+
+    .selectArrow {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #94a3b8;
+        font-size: 0.75rem;
+    }
+
+    .tableResponsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    .th {
+        padding: 1rem 1.5rem;
+        background-color: rgba(250, 245, 255, 0.5);
+        border-bottom: 1px solid var(--border-purple);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--primary-dark);
+        letter-spacing: 0.05em;
+    }
+
+    .td {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 0.875rem;
+    }
+
+    .userCell {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .tableAvatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 1rem;
+        background-color: #f3e8ff;
+        color: var(--primary-medium);
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        flex-shrink: 0;
+        border: 1px solid rgba(123, 44, 191, 0.2);
+    }
+
+    .userName {
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .userEmail {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .identifierCode {
+        font-family: monospace;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #475569;
+    }
+
+    .roleTag {
+        display: inline-flex;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .roleAluno {
+        background-color: #eff6ff;
+        color: #1d4ed8;
+        border: 1px solid #bfdbfe;
+    }
+
+    .roleColab {
+        background-color: #ecfdf5;
+        color: #047857;
+        border: 1px solid #a7f3d0;
+    }
+
+    .roleAdmin {
+        background-color: #faf5ff;
+        color: #7e22ce;
+        border: 1px solid #e9d5ff;
+    }
+
+    .statusIndicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .statusAtivo {
+        color: #16a34a;
+    }
+
+    .statusInativo {
+        color: #94a3b8;
+    }
+
+    .statusDot {
+        width: 0.625rem;
+        height: 0.625rem;
+        border-radius: 9999px;
+    }
+
+    .dotAtivo {
+        background-color: #22c55e;
+    }
+
+    .dotInativo {
+        background-color: #cbd5e1;
+    }
+
+    .actionsCell {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.375rem;
+    }
+
+    .iconBtn {
+        padding: 0.5rem;
+        background: transparent;
+        border: none;
+        border-radius: 0.75rem;
+        color: #64748b;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+
+    .iconBtn:hover {
+        color: var(--primary-medium);
+        background-color: #f3e8ff;
+    }
+
+    .iconBtnDanger:hover {
+        color: #e11d48;
+        background-color: #ffe4e6;
+    }
+
+    .tableFooter {
+        padding: 1rem 1.5rem;
+        background-color: rgba(250, 245, 255, 0.2);
+        border-top: 1px solid var(--border-purple);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    /* ── Styling Guidelines and Modals ── */
+    .guidelinesGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+        .guidelinesGrid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .guidelinesGrid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .guidelineCard {
+        background-color: #ffffff;
+        border-radius: var(--radius-xl);
+        padding: 1.5rem;
+        border: 1px solid var(--border-purple);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .guidelineIcon {
+        width: 3rem;
+        height: 3rem;
+        background-color: #faf5ff;
+        color: var(--primary-medium);
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-purple);
+    }
+
+    .guidelineTitle {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+    }
+
+    .guidelineText {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    /* Modal Overlay & Card */
+    .modalOverlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(4px);
+        padding: 1rem;
+    }
+
+    .modal {
+        background-color: #ffffff;
+        border-radius: var(--radius-xl);
+        max-width: 32rem;
+        width: 100%;
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        animation: modalIn 0.2s ease-out forwards;
+    }
+
+    @keyframes modalIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .modalHeader {
+        background-color: var(--primary-dark);
+        color: #ffffff;
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .modalHeaderTitle {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+    }
+
+    .modalCloseBtn {
+        background: transparent;
+        border: none;
+        color: #e9d5ff;
+        cursor: pointer;
+        padding: 0.25rem;
+    }
+
+    .modalCloseBtn:hover {
+        color: #ffffff;
+    }
+
+    .modalForm {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .formLabel {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #475569;
+        margin-bottom: 0.375rem;
+    }
+
+    .formInput,
+    .formSelect {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s;
+    }
+
+    .formInput:focus,
+    .formSelect:focus {
+        border-color: var(--primary-medium);
+    }
+
+    .formRow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .modalActions {
+        padding-top: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .btnSecondary {
+        padding: 0.75rem 1.25rem;
+        border-radius: 1rem;
+        border: 1px solid #cbd5e1;
+        background-color: transparent;
+        color: #334155;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .btnDanger {
+        padding: 0.75rem 1.5rem;
+        border-radius: 1rem;
+        border: none;
+        background-color: #e11d48;
+        color: #ffffff;
+        font-size: 0.875rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .btnDanger:hover {
+        background-color: #be123c;
+    }
+
+    /* ── Styling Toast Notifications and Footer ── */
+    .toast {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.875rem 1.25rem;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-lg);
+        font-size: 0.875rem;
+        font-weight: 600;
+        border: 1px solid transparent;
+    }
+
+    .toastSuccess {
+        background-color: #f0fdf4;
+        color: #166534;
+        border-color: #bbf7d0;
+    }
+
+    .toastError {
+        background-color: #fef2f2;
+        color: #991b1b;
+        border-color: #fecaca;
+    }
+
+    .toastInfo {
+        background-color: #fffbeb;
+        color: #92400e;
+        border-color: #fde68a;
+    }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVO — ajustes adicionais (mobile, tablet e desktop)
+   Este bloco vem por último de propósito: refina as regras acima
+   sem apagar os @media mobile-first que já existiam.
+═══════════════════════════════════════════════════════════════ */
+
+.container {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* ── Cabeçalho / marca ── */
+.brand {
+    min-width: 0;
+}
+
+.brandLogo {
+    height: clamp(64px, 16vw, 150px);     /* era 150px fixo em qualquer tela */
+    max-width: 100%;
+}
+
+.userBadge {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.userBadgeText {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Hero ── */
+.hero {
+    padding: clamp(2.5rem, 8vw, 4rem) clamp(1rem, 4vw, 1.5rem);
+}
+
+.heroTitle {
+    font-size: clamp(1.75rem, 1.2rem + 3.5vw, 2.75rem);   /* fluido, em vez de 2 saltos (2rem → 2.75rem) */
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    overflow-wrap: break-word;
+}
+
+.heroDescription {
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.heroBtn {
+    box-sizing: border-box;
+    max-width: 100%;
+    justify-content: center;
+}
+
+/* ── Seções ── */
+.section {
+    box-sizing: border-box;
+    padding: clamp(2.5rem, 7vw, 4rem) clamp(1rem, 4vw, 1.5rem);
+}
+
+.sectionHeader {
+    margin-bottom: clamp(1.75rem, 5vw, 3rem);
+}
+
+.sectionTitle {
+    font-size: clamp(1.4rem, 4.5vw, 1.75rem);
+}
+
+/* ── Cards de ação ──
+   auto-fit: 1 coluna no celular, 2 no tablet e 3 no desktop,
+   sem os 3 cards espremidos entre 768px e ~1000px */
+.cardsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.card {
+    min-width: 0;
+    padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.cardIconBox {
+    width: clamp(4rem, 12vw, 5rem);
+    height: clamp(4rem, 12vw, 5rem);
+}
+
+.cardTitle {
+    font-size: clamp(1.1rem, 3vw, 1.25rem);
+    overflow-wrap: break-word;
+}
+
+.cardDescription {
+    margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* ── Tabela de usuários ── */
+.tableContainer {
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.tableHeader {
+    padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.tableMainTitle {
+    font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+}
+
+.btnPrimary {
+    justify-content: center;
+}
+
+.searchInput,
+.filterSelect,
+.formInput,
+.formSelect {
+    box-sizing: border-box;               /* width:100% + padding não estoura o container */
+}
+
+.tableResponsive {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+}
+
+.table {
+    min-width: 680px;                     /* no celular a tabela rola na horizontal em vez de espremer as colunas */
+}
+
+.th,
+.td {
+    padding: 1rem clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.roleTag,
+.statusIndicator {
+    white-space: nowrap;
+}
+
+.userCell {
+    min-width: 0;
+}
+
+.userName,
+.userEmail {
+    overflow-wrap: anywhere;
+}
+
+.actionsCell {
+    flex-shrink: 0;
+}
+
+.tableFooter {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 1rem clamp(0.75rem, 3vw, 1.5rem);
+}
+
+/* ── Diretrizes ── */
+.guidelineCard {
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+/* ── Modal ── */
+.modal {
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);      /* celular deitado / teclado aberto: o modal rola em vez de cortar */
+    overflow-y: auto;
+}
+
+.modalHeader {
+    gap: 0.75rem;
+    padding: 1.25rem clamp(1rem, 4vw, 1.5rem);
+}
+
+.modalHeaderTitle {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.modalCloseBtn {
+    flex-shrink: 0;
+}
+
+.modalForm {
+    padding: clamp(1rem, 4vw, 1.5rem);
+}
+
+.modalActions {
+    flex-wrap: wrap;
+}
+
+/* ── Toast ── */
+.toast {
+    box-sizing: border-box;
+    max-width: calc(100vw - 3rem);
+}
+
+/* ── Tablet e acima (≥ 768px) ── */
+@media (min-width: 768px) {
+    .filterRow {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    }
+}
+
+/* ── Celular (≤ 767px) ── */
+@media (max-width: 767px) {
+    /* 16px evita o zoom automático do iOS ao focar nos campos */
+    .searchInput,
+    .filterSelect,
+    .formInput,
+    .formSelect {
+        font-size: 1rem;
+    }
+
+    .tableFooter {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ── Celular pequeno (≤ 480px) ── */
+@media (max-width: 480px) {
+    .userBadge {
+        padding: 0.4rem;
+    }
+
+    .userBadgeText {
+        display: none;                    /* fica só o avatar para sobrar espaço no cabeçalho */
+    }
+
+    .heroBtn {
+        width: 100%;
+    }
+
+    .formRow {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .modalActions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .modalActions button {
+        width: 100%;
+    }
+
+    .toast {
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+    }
+}
+
+/* ── Telas touch: alvos de toque confortáveis e sem efeito de "subir" no hover ── */
+@media (pointer: coarse) {
+    .iconBtn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .cardBtn,
+    .btnPrimary,
+    .btnSecondary,
+    .btnDanger {
+        min-height: 44px;
+    }
+}
+
+@media (hover: none) {
+    .heroBtn:hover,
+    .card:hover {
+        transform: none;
+    }
+}
+
+/* ── Acessibilidade ── */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

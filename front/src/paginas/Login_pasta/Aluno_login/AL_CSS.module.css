@@ -1,0 +1,774 @@
+/* =========================================================
+   TELA DE LOGIN: versão responsiva / mobile-first friendly
+   ========================================================= */
+
+/* Corrigido: era ".root", que só funciona se algum elemento tiver
+   class="root". ":root" aplica as variáveis em toda a página.
+   Mantive ".root" junto para não quebrar nada que já use. */
+:root,
+.root {
+  --primary-gradient-start: #7E57C2;
+  --primary-gradient-end:   #4527A0;
+  --accent-primary:         #6A1B9A;
+  --accent-secondary:       #2979FF;
+  --accent-success:         #00C853;
+  --accent-warning:         #FF9100;
+  --glass-bg:               rgba(255, 255, 255, 0.25);
+  --glass-border:           rgba(255, 255, 255, 0.18);
+  --text-light:             #FFFFFF;
+  --text-dark:              #2C3E50;
+  --text-muted:             #7E8C9A;
+  --shadow-soft:            0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-medium:          0 15px 35px rgba(0, 0, 0, 0.15);
+  --shadow-heavy:           0 25px 50px rgba(0, 0, 0, 0.25);
+
+  --btn-gradient:           linear-gradient(135deg, #7E57C2 0%, #4527A0 100%);
+  --btn-hover-gradient:     linear-gradient(135deg, #8E67D2 0%, #5537B0 100%);
+  --glass-gradient:         linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+
+  --font-primary:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-accent:   'Poppins', 'Segoe UI', sans-serif;
+
+  --spacing-xs:  0.5rem;
+  --spacing-sm:  1rem;
+  --spacing-md:  1.5rem;
+  --spacing-lg:  2rem;
+  --spacing-xl:  3rem;
+  --spacing-xxl: 4rem;
+
+  --border-radius-sm:  12px;
+  --border-radius-md:  20px;
+  --border-radius-lg:  30px;
+  --border-radius-xl:  40px;
+
+  --transition-fast:   0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:   0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Áreas seguras (notch / barra home do iPhone) */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+}
+
+/* Base */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ── Partículas ── */
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden; /* evita scroll horizontal causado pelas partículas */
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: float 20s infinite linear;
+  will-change: transform, opacity;
+}
+
+@keyframes float {
+  0%   { transform: translateY(100vh) rotate(0deg);    opacity: 0;   }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.7; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0;   }
+}
+
+/* ── Layout ── */
+.loginPage {
+  display: flex;
+  min-height: 100vh;   /* fallback */
+  min-height: 100dvh;  /* respeita a barra de endereço do mobile */
+  max-width: 1920px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  font-family: var(--font-primary);
+  color: var(--text-light);
+  background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+}
+
+/* ── Brand Panel ── */
+.brandPanel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xxl);
+  text-align: center;
+  position: relative;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: var(--glass-gradient);
+  border-right: 1px solid var(--glass-border);
+}
+
+.brandContent {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoContainer {
+  position: relative;
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 380px;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+  transition: all var(--transition-medium);
+}
+
+.tagline {
+  font-family: var(--font-accent);
+  font-size: clamp(1.15rem, 3.5vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--text-light);
+  max-width: 400px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  position: relative;
+  overflow-wrap: anywhere;
+}
+
+.tagline::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--text-light), transparent);
+  border-radius: 2px;
+}
+
+/* ── Form Panel ── */
+.formPanel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xxl);
+  position: relative;
+}
+
+.loginFormContainer {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-heavy);
+  padding: clamp(var(--spacing-lg), 5vw, var(--spacing-xxl));
+  width: 100%;
+  max-width: min(480px, 100%);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-medium);
+}
+
+.loginFormContainer::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: rotate(45deg);
+  transition: all var(--transition-slow);
+  pointer-events: none; /* não intercepta toques nos campos */
+}
+
+.loginForm { position: relative; z-index: 2; }
+
+/* ── Form Header ── */
+.formHeader {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.formTitle {
+  font-family: var(--font-accent);
+  font-size: clamp(1.6rem, 6vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--text-light) 0%, #E1F5FE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 var(--spacing-xs);
+}
+
+.formSubtitle {
+  font-family: var(--font-accent);
+  font-size: clamp(0.85rem, 3vw, 1.3rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: clamp(1px, 0.4vw, 2px);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.signupPrompt {
+  text-align: center;
+  margin: var(--spacing-lg) 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.8);
+}
+
+.signupPrompt a {
+  color: var(--text-light);
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 0; /* aumenta a área de toque */
+  transition: all var(--transition-fast);
+}
+
+.signupPrompt a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--text-light);
+  transition: width var(--transition-medium);
+}
+
+/* ── Form Group ── */
+.formGroup {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-lg);
+  padding: 0.25rem var(--spacing-sm);
+  transition: all var(--transition-fast);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.inputWrapper:focus-within {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1.1rem; /* fixo: não depende mais do spacing que muda por breakpoint */
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.7);
+  font-size: 1.1rem;
+  transition: all var(--transition-fast);
+  pointer-events: none;
+}
+
+.inputWrapper:focus-within .inputIcon {
+  color: var(--text-light);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.inputWrapper input {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;          /* alvo de toque confortável */
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-light);
+  font-size: 1rem;           /* 16px+ evita o zoom automático do iOS ao focar */
+  padding: 0.5rem var(--spacing-sm) 0.5rem 1.9rem;
+}
+
+.inputWrapper input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+/* Evita o fundo amarelo/azul do autofill do navegador */
+.inputWrapper input:-webkit-autofill,
+.inputWrapper input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-light);
+  transition: background-color 9999s ease-out 0s;
+  caret-color: var(--text-light);
+}
+
+.inputWrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left var(--transition-slow);
+  pointer-events: none;
+}
+
+.inputWrapper:focus-within::after { left: 100%; }
+
+/* ── Esqueceu a senha ── */
+.forgotPassword {
+  text-align: right;
+  margin: var(--spacing-sm) 0 var(--spacing-lg);
+}
+
+.forgotPassword a {
+  display: inline-block;
+  padding: 0.5rem 0; /* área de toque maior */
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.forgotPassword a::after {
+  content: '';
+  position: absolute;
+  bottom: 0.35rem; left: 0;
+  width: 0; height: 1px;
+  background: var(--text-light);
+  transition: width var(--transition-medium);
+}
+
+/* ── Submit Button ── */
+.submitBtn {
+  width: 100%;
+  min-height: 52px;
+  background: var(--btn-gradient);
+  color: var(--text-light);
+  border: none;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(106,27,154,0.3);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation; /* remove o atraso de toque duplo */
+}
+
+.submitBtn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left var(--transition-slow);
+  pointer-events: none;
+}
+
+.submitBtn:active { transform: translateY(-1px); }
+
+.submitBtn i {
+  margin-left: var(--spacing-xs);
+  transition: transform var(--transition-fast);
+}
+
+/* Foco visível para teclado */
+.submitBtn:focus-visible,
+.signupPrompt a:focus-visible,
+.forgotPassword a:focus-visible,
+.modalClose:focus-visible {
+  outline: 3px solid rgba(255,255,255,0.85);
+  outline-offset: 3px;
+}
+
+/* ── Hover: só em dispositivos que realmente têm mouse ──
+   (no celular o :hover "gruda" depois do toque e deixa o card deslocado) */
+@media (hover: hover) and (pointer: fine) {
+  .logo:hover {
+    transform: scale(1.05) rotate(2deg);
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));
+  }
+
+  .loginFormContainer:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy), 0 30px 60px rgba(0,0,0,0.3);
+  }
+
+  .loginFormContainer:hover::before {
+    transform: rotate(45deg) translate(10%, 10%);
+  }
+
+  .signupPrompt a:hover { color: #E1F5FE; }
+  .signupPrompt a:hover::after { width: 100%; }
+
+  .forgotPassword a:hover { color: var(--text-light); }
+  .forgotPassword a:hover::after { width: 100%; }
+
+  .submitBtn:hover {
+    background: var(--btn-hover-gradient);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(106,27,154,0.4);
+  }
+
+  .submitBtn:hover::before { left: 100%; }
+  .submitBtn:hover i { transform: translateX(3px); }
+
+  .modalClose:hover { color: #E1F5FE; }
+}
+
+/* ── Modal ── */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  padding: calc(var(--spacing-sm) + var(--safe-top)) calc(var(--spacing-sm) + var(--safe-right)) calc(var(--spacing-sm) + var(--safe-bottom)) calc(var(--spacing-sm) + var(--safe-left));
+  background: rgba(0,0,0,0.7);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  transition: opacity var(--transition-medium);
+}
+
+.modalActive {
+  display: flex;
+  opacity: 1;
+}
+
+.modalContent {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  width: 100%;
+  max-width: 450px;
+  max-height: 100%;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(-50px);
+  transition: transform var(--transition-medium);
+  box-shadow: var(--shadow-heavy);
+  margin: auto;
+}
+
+.modalActive .modalContent { transform: translateY(0); }
+
+.modalHeader {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  padding-right: 1.5rem; /* não deixa o título bater no botão fechar */
+  padding-left: 1.5rem;
+}
+
+.modalTitle {
+  font-family: var(--font-accent);
+  font-size: clamp(1.25rem, 4.5vw, 1.5rem);
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 0 0 var(--spacing-xs);
+}
+
+.modalSubtitle {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.modalClose {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  width: 44px;   /* alvo de toque mínimo recomendado */
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modalSuccess { text-align: center; }
+
+.modalSuccess i {
+  font-size: 3rem;
+  color: var(--accent-success);
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+/* ── Floating Elements ── */
+.floatingElements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.floatingElement {
+  position: absolute;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  animation: floatElement 15s infinite ease-in-out;
+}
+
+@keyframes floatElement {
+  0%,100% { transform: translateY(0px)    rotate(0deg);   }
+  50%     { transform: translateY(-20px)  rotate(180deg); }
+}
+
+/* ── Validação ── */
+.validationMessage {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-sm);
+  display: none;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+
+.valid {
+  display: block;
+  background: rgba(0, 200, 83, 0.1);
+  color: #00C853;
+  border-left: 3px solid #00C853;
+}
+
+.invalid {
+  display: block;
+  background: rgba(255, 23, 68, 0.1);
+  color: #FF1744;
+  border-left: 3px solid #FF1744;
+}
+
+/* =========================================================
+   RESPONSIVO
+   Em vez de reescrever cada componente, reduzimos as
+   variáveis de espaçamento/raio em cada breakpoint.
+   ========================================================= */
+
+/* Tablet / telas médias: layout vira coluna */
+@media (max-width: 1024px) {
+  :root, .root {
+    --spacing-xxl: 3rem;
+    --spacing-xl:  2.25rem;
+    --border-radius-xl: 34px;
+  }
+
+  .loginPage {
+    flex-direction: column;
+    padding-left: var(--safe-left);
+    padding-right: var(--safe-right);
+  }
+
+  .brandPanel {
+    flex: 0 0 auto;
+    padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+    padding-top: calc(var(--spacing-xl) + var(--safe-top));
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .logoContainer { margin-bottom: var(--spacing-lg); }
+  .logo          { max-width: 260px; }
+
+  .formPanel {
+    flex: 1 0 auto;
+    padding: var(--spacing-xl);
+    padding-bottom: calc(var(--spacing-xl) + var(--safe-bottom));
+  }
+
+  .loginFormContainer { max-width: min(440px, 100%); }
+}
+
+/* Celulares grandes / tablets pequenos */
+@media (max-width: 768px) {
+  :root, .root {
+    --spacing-xxl: 2rem;
+    --spacing-xl:  1.75rem;
+    --spacing-lg:  1.25rem;
+    --spacing-md:  1.1rem;
+    --border-radius-xl: 28px;
+    --border-radius-lg: 24px;
+  }
+
+  .brandPanel {
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md);
+    padding-top: calc(var(--spacing-lg) + var(--safe-top));
+  }
+
+  .logoContainer { margin-bottom: var(--spacing-md); }
+  .logo          { max-width: 200px; }
+
+  /* Menos partículas = mais fluidez e menos bateria gasta */
+  .particle:nth-child(n+11) { display: none; }
+
+  .formPanel { padding: var(--spacing-lg); }
+
+  .loginFormContainer {
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .formHeader { margin-bottom: var(--spacing-lg); }
+  .modalContent { padding: var(--spacing-lg); }
+}
+
+/* Celulares comuns */
+@media (max-width: 480px) {
+  :root, .root {
+    --spacing-xxl: 1.5rem;
+    --spacing-xl:  1.25rem;
+    --spacing-lg:  1rem;
+    --spacing-md:  1rem;
+    --border-radius-xl: 24px;
+    --border-radius-lg: 18px;
+    --border-radius-md: 16px;
+  }
+
+  .brandPanel {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+    padding-top: calc(var(--spacing-md) + var(--safe-top));
+  }
+
+  .logo { max-width: 150px; }
+
+  .tagline         { font-size: 1.05rem; max-width: 280px; }
+  .tagline::after  { bottom: -8px; width: 48px; }
+
+  /* O painel de marca fica compacto, o formulário é a estrela */
+  .formPanel {
+    padding: var(--spacing-md) var(--spacing-sm);
+    padding-bottom: calc(var(--spacing-lg) + var(--safe-bottom));
+    align-items: flex-start;
+  }
+
+  .loginFormContainer {
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-radius: var(--border-radius-xl);
+  }
+
+  .formGroup          { margin-bottom: var(--spacing-md); }
+  .formGroup label    { font-size: 0.9rem; }
+  .signupPrompt       { font-size: 0.9rem; margin: var(--spacing-md) 0; }
+  .formSubtitle       { letter-spacing: 1px; }
+  .forgotPassword     { margin: 0.25rem 0 var(--spacing-md); }
+  .submitBtn          { font-size: 1rem; }
+
+  .modalContent       { padding: var(--spacing-lg) var(--spacing-md); }
+  .modalHeader        { padding-left: 1rem; padding-right: 1rem; }
+}
+
+/* Celulares pequenos (iPhone SE, Galaxy mini etc.) */
+@media (max-width: 360px) {
+  .logo            { max-width: 120px; }
+  .tagline         { font-size: 0.95rem; }
+  .formTitle       { font-size: 1.5rem; }
+  .formSubtitle    { font-size: 0.8rem; }
+  .inputIcon       { left: 0.9rem; font-size: 1rem; }
+  .inputWrapper input { padding-left: 1.7rem; }
+}
+
+/* Celular deitado (pouca altura): lado a lado de novo e sem desperdiçar espaço vertical */
+@media (max-height: 520px) and (orientation: landscape) {
+  .loginPage {
+    flex-direction: row;
+  }
+
+  .brandPanel {
+    flex: 0 0 38%;
+    padding: var(--spacing-md);
+    border-bottom: none;
+    border-right: 1px solid var(--glass-border);
+  }
+
+  .logo          { max-width: 110px; }
+  .logoContainer { margin-bottom: var(--spacing-sm); }
+  .tagline       { font-size: 0.95rem; }
+  .tagline::after { display: none; }
+
+  .formPanel {
+    padding: var(--spacing-sm);
+    align-items: flex-start;
+  }
+
+  .formHeader { margin-bottom: var(--spacing-sm); }
+  .formGroup  { margin-bottom: var(--spacing-sm); }
+}
+
+/* Respeita quem desativou animações no sistema (acessibilidade / bateria) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .particles,
+  .floatingElements { display: none; }
+}
+
+/* Navegadores sem suporte a backdrop-filter: fundo mais opaco para manter a legibilidade */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .loginFormContainer,
+  .modalContent { background: rgba(69, 39, 160, 0.75); }
+}

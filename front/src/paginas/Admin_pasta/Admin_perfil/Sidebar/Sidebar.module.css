@@ -1,0 +1,353 @@
+.pageWrapper {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.gap {
+  display: flex;
+  height: 10vh;
+}
+
+
+.sidebar {
+  position: relative;                  /* rola junto com a página (como no seu arquivo) */
+  top: 0;
+  left: 0;
+  width: 280px;
+  background: var(--purple-primary);   /* ← linear-gradient() com 1 cor só é inválido e o fundo não era aplicado */
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow-y: auto;
+  flex-shrink: 0;
+  min-height: 100%;
+}
+
+
+/* Logo Section */
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.logoTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.5px;
+}
+
+.logoSubtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+}
+
+/* User Info */
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  min-width: 0;
+}
+
+.userAvatar {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;                         /* ← permite o ellipsis funcionar dentro do flex */
+}
+
+.userName {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.userRM {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Navigation Menu */
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  transform: translateX(5px);
+}
+
+.navItemActive {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navIcon {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.navLabel {
+  letter-spacing: 0.5px;
+}
+
+/* Logout Section */
+.logoutSection {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-primary);
+}
+
+.logoutButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVO
+   ═══════════════════════════════════════════════════════════ */
+
+/* Telas baixas (ex.: celular deitado ou notebook pequeno):
+   deixa a sidebar mais compacta para o menu caber sem rolar tanto */
+@media (min-width: 769px) and (max-height: 700px) {
+  .sidebar {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .logoSection {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .userInfo {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+  }
+
+  .navItem {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* ── Mobile / tablet vertical (≤ 768px) ──
+   A sidebar vira uma barra compacta no topo:
+   linha 1: logo + usuário · linha 2: menu com rolagem horizontal · linha 3: sair */
+@media (max-width: 768px) {
+  .pageWrapper {
+    flex-direction: column;              /* ← faltava: sem isso a sidebar a 100% ficava ao lado do conteúdo */
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 0;                     /* anula o min-height: 100% do desktop */
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    overflow: visible;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Linha 1 */
+  .logoSection {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+    gap: 0.75rem;
+  }
+
+  .logoIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logoSubtitle {
+    font-size: 1rem;
+  }
+
+  .userInfo {
+    flex: 1 1 0;
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .userAvatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .userName {
+    font-size: 0.9rem;
+  }
+
+  /* Linha 2: menu horizontal com rolagem em vez de empilhar e ocupar a tela toda */
+  .navMenu {
+    flex: 1 1 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .navMenu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navItem {
+    flex: 0 0 auto;
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+
+  .navItem:hover {
+    transform: none;
+  }
+
+  /* Linha 3 */
+  .logoutSection {
+    flex: 1 1 100%;
+    margin-top: 0;
+    padding-top: 0.75rem;
+  }
+
+  .logoutButton {
+    justify-content: center;
+    padding: 0.65rem 1rem;
+  }
+
+  .logoutButton:hover {
+    transform: none;
+  }
+}
+
+/* ── Mobile pequeno (≤ 480px) ── */
+@media (max-width: 480px) {
+  .sidebar {
+    padding: 0.75rem;
+    gap: 0.625rem;
+  }
+
+  /* telas muito estreitas: só o ícone da logo, o nome do usuário ganha espaço */
+  .logoText {
+    display: none;
+  }
+
+  .navItem {
+    padding: 0.6rem 0.875rem;
+    font-size: 0.8rem;
+  }
+
+  .userRM {
+    font-size: 0.75rem;
+  }
+}
+
+/* ── Acessibilidade ── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
